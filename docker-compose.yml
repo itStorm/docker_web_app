@@ -36,14 +36,18 @@ services:
       - NGINX_HOST_NAME=test-project.loc
       - APP_DIR=/var/www/app
       - LOGS_DIR=/app_logs
-      
+
   db:
     image: mysql:9.2
     restart: always
     volumes:
       - ./docker/db/dump:/docker-entrypoint-initdb.d
+      - app-db-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootqwerty123
-      MYSQL_DATABASE: app_db
-      MYSQL_USER: app_db_user
-      MYSQL_PASSWORD: qwerty123
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSWD}
+      MYSQL_DATABASE: ${DB_APP_NAME}
+      MYSQL_USER: ${DB_APP_USER}
+      MYSQL_PASSWORD: ${DB_APP_USER_PSWD}
+
+volumes:
+  app-db-data:
