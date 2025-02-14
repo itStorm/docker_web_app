@@ -1,0 +1,26 @@
+
+
+Up composer with detach mode:
+    docker compose up -d
+    
+    docker compose -f docker-compose-dev-tests.yml up -d
+
+docker ps         # List running containers
+docker ps
+docker ps -a
+docker ps --no-trunc
+
+docker logs       # Print logs from container
+docker stop       # Stop running container
+docker rm         # Remove/delete container
+
+docker exec -it CONTAINER_ID sh # Container shell 
+docker exec CONTAINER_ID bash # Container bash
+
+
+docker compose up
+docker compose down
+docker compose ps
+docker compose exec [service name] [command]
+docker compose images
+docker compose logs SERVICE_ALIAS

@@ -1,0 +1,51 @@
+services:
+  php:
+    build:
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+      - ./logs:/app_logs
+
+  frontend:
+    image: nginx:1.26.3-alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./docker/frontend/nginx/templates:/etc/nginx/templates
+      - ./app:/var/www/app
+      - ./logs:/app_logs
+    environment:
+      - NGINX_PORT=80
+      - NGINX_BACKEND_PORT=8000
+      - NGINX_HOST_NAME=test-project.loc
+      - APP_DIR=/var/www/app
+      - LOGS_DIR=/app_logs
+
+  backend:
+    image: nginx:1.26.3-alpine
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./docker/backend/nginx/templates:/etc/nginx/templates
+      - ./app:/var/www/app
+      - ./logs:/app_logs
+    environment:
+      - NGINX_PORT=80
+      - NGINX_BACKEND_PORT=8000
+      - PHP_FPM_PORT=9000
+      - NGINX_HOST_NAME=test-project.loc
+      - APP_DIR=/var/www/app
+      - LOGS_DIR=/app_logs
+      
+  # db:
+  #   image: mysql:9.2
+  #   restart: always
+  #   volumes:
+  #     - ./docker/db/dump:/docker-entrypoint-initdb.d
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootqwerty123
+  #     MYSQL_DATABASE: app_db
+  #     MYSQL_USER: app_db_user
+  #     MYSQL_PASSWORD: qwerty123
+
+  # Redis
