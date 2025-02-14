@@ -37,15 +37,13 @@ services:
       - APP_DIR=/var/www/app
       - LOGS_DIR=/app_logs
       
-  # db:
-  #   image: mysql:9.2
-  #   restart: always
-  #   volumes:
-  #     - ./docker/db/dump:/docker-entrypoint-initdb.d
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: rootqwerty123
-  #     MYSQL_DATABASE: app_db
-  #     MYSQL_USER: app_db_user
-  #     MYSQL_PASSWORD: qwerty123
-
-  # Redis
+  db:
+    image: mysql:9.2
+    restart: always
+    volumes:
+      - ./docker/db/dump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: rootqwerty123
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: app_db_user
+      MYSQL_PASSWORD: qwerty123

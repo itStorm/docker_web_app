@@ -18,6 +18,7 @@ docker exec -it CONTAINER_ID sh # Container shell
 docker exec CONTAINER_ID bash # Container bash
 
 
+docker compose stop
 docker compose up
 docker compose down
 docker compose ps
